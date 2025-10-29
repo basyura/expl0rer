@@ -23,6 +23,8 @@ func main() {
 	exe := "explorer.exe"
 	if isDirectory(path) {
 		exe = `C:\Program Files\HmFilerClassic\HmFilerClassic.exe`
+	} else {
+		exe = `C:\Program Files\vim\gvim.exe`
 	}
 
 	cmd := exec.Command(exe, path)
