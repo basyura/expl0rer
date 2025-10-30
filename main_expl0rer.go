@@ -37,8 +37,11 @@ func main() {
 	}
 
 	exe := "explorer.exe"
+	ext := strings.ToLower(filepath.Ext(path))
 	if isDirectory(path) {
 		exe = `C:\Program Files\HmFilerClassic\HmFilerClassic.exe`
+	} else if ext == ".sln" {
+
 	} else if isTextFile(path) {
 		exe = `C:\Program Files\vim\gvim.exe`
 	}
@@ -65,21 +68,21 @@ func isDirectory(path string) bool {
 }
 
 func isTextFile(path string) bool {
-    if path == "" {
-        return false
-    }
+	if path == "" {
+		return false
+	}
 
-    // 先頭が '.' の隠しファイルはテキスト扱い
-    base := filepath.Base(path)
-    if base != "." && base != ".." && strings.HasPrefix(base, ".") {
-        return true
-    }
+	// 先頭が '.' の隠しファイルはテキスト扱い
+	base := filepath.Base(path)
+	if base != "." && base != ".." && strings.HasPrefix(base, ".") {
+		return true
+	}
 
-    ext := strings.ToLower(filepath.Ext(path))
-    // ユーザー要望: 拡張子なしはテキスト扱い
-    if ext == "" {
-        return true
-    }
+	ext := strings.ToLower(filepath.Ext(path))
+	// ユーザー要望: 拡張子なしはテキスト扱い
+	if ext == "" {
+		return true
+	}
 
 	// 代表的なテキスト拡張子の簡易判定（即 true）
 	if _, ok := textExts[ext]; ok {
