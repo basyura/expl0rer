@@ -8,6 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 	"unicode/utf8"
+
+	"expl0rer/config"
 )
 
 // 代表的なテキスト拡張子（小文字）
@@ -45,6 +47,8 @@ func main() {
 	} else if isTextFile(path) {
 		exe = `C:\Program Files\vim\gvim.exe`
 	}
+
+	exe = config.ResolveToolExe(exe)
 
 	cmd := exec.Command(exe, path)
 	if err := cmd.Run(); err != nil {
